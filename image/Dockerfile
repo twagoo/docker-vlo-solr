@@ -6,3 +6,4 @@ RUN bin/solr start \
 	&& bin/solr create_core -c vlo \
 	&& bin/solr stop
 
+# TODO: insert configuration
