@@ -11,9 +11,9 @@ COPY tmp/solr-conf/* /opt/solr/server/solr/vlo/conf/
 COPY tmp/solr-conf/xslt/* /opt/solr/server/solr/vlo/conf/xslt/
 
 # Configure solr settings
-RUN mkdir script
-COPY script/configure-solr.sh script/
-RUN script/configure-solr.sh
+RUN mkdir /home/solr/script
+COPY script/* /home/solr/script/
+RUN /home/solr/script/configure-solr.sh
 
 # TODO: insert configuration
 
