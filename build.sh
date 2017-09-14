@@ -4,8 +4,9 @@ set -e
 PROJECT_NAME=vlo-solr
 VERSION=1.0
 
-VLO_DISTRIBUTION_PACKAGE="https://github.com/clarin-eric/VLO/releases/download/vlo-4.2.1/vlo-4.2.1-Distribution.tar.gz"
-VLO_SOLR_CONF_DIR="config/solr/collection1/conf"
+#VLO_DISTRIBUTION_PACKAGE="https://github.com/clarin-eric/VLO/releases/download/vlo-4.2.1/vlo-4.2.1-Distribution.tar.gz"
+VLO_DISTRIBUTION_PACKAGE="file:/Users/twagoo/Desktop/vlo-solr6.tar.gz"
+VLO_SOLR_CONF_DIR="collection1"
 
 REV=$(git rev-parse --short HEAD)
 TAG=1.0-SNAPSHOT-${REV:-latest}
