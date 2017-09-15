@@ -5,8 +5,8 @@ PROJECT_NAME=vlo-solr
 VERSION=1.0
 
 VLO_DISTRIBUTION_PACKAGE="https://github.com/clarin-eric/VLO/releases/download/vlo-4.2.1/vlo-4.2.1-Distribution.tar.gz"
-SOLR_CONF_PACKAGE="https://github.com/clarin-eric/VLO/archive/issue87.zip"
-SOLR_CONF_DIR="VLO-issue87/vlo-web-app/src/test/resources/solr/collection1"
+SOLR_CONF_PACKAGE="https://github.com/clarin-eric/VLO/archive/issue87.tar.gz"
+SOLR_CONF_DIR="vlo-web-app/src/test/resources/solr/collection1"
 
 REV=$(git rev-parse --short HEAD)
 TAG=1.0-SNAPSHOT-${REV:-latest}
@@ -52,8 +52,7 @@ echo "Retrieving and unpacking VLO distribution..."
 
 echo "Retrieving and unpacking VLO solr configuration..."
 (cd ${SOLR_CONF_TMP_DIR} &&
-	curl -L\# ${SOLR_CONF_PACKAGE} > ${TMPDIR}/tmp.zip && 
-	unzip -q ${TMPDIR}/tmp.zip; rm ${TMPDIR}/tmp.zip)
+	curl -L\# ${SOLR_CONF_PACKAGE}| tar zx --strip-components=1)
 
 # Prepare config
 cp -R "${SOLR_CONF_TMP_DIR}/${SOLR_CONF_DIR}" "${SOLR_CONF_TARGET_DIR}"
