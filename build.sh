@@ -8,9 +8,6 @@ VLO_DISTRIBUTION_PACKAGE="https://github.com/clarin-eric/VLO/releases/download/v
 SOLR_CONF_PACKAGE="https://github.com/clarin-eric/VLO/archive/issue87.zip"
 SOLR_CONF_DIR="VLO-issue87/vlo-web-app/src/test/resources/solr/collection1"
 
-#TODO: use extracted VLO distribution as VLO directory
-VLO_DIR="/Users/twagoo/Desktop/vlo-4.2.1"
-
 REV=$(git rev-parse --short HEAD)
 TAG=1.0-SNAPSHOT-${REV:-latest}
 IMAGE_QUALIFIED_NAME="$PROJECT_NAME:${TAG}"
@@ -70,7 +67,7 @@ echo "Building ${IMAGE_QUALIFIED_NAME}"
 if [ "${IMPORT}" -eq 1 ]; then
 	echo "Adapting VLO importer configuration"
 	# Configure to connect to instance
-	sed -e 's_<solrUrl>.*</solrUrl>_<solrUrl>http://localhost:8983/solr/collection1/</solrUrl>_g' ${VLO_DIR}/config/VloConfig.xml > ${VLO_DIR}/config/VloConfig-docker.xml
+	sed -e 's_<solrUrl>.*</solrUrl>_<solrUrl>http://localhost:8983/solr/collection1/</solrUrl>_g' ${VLO_TMP_DIR}/config/VloConfig.xml > ${VLO_TMP_DIR}/config/VloConfig-docker.xml
 	# TODO: set data roots
 	echo "Starting Solr container"
 	docker run --name vlo_solr_import -d -p 8983:8983 -t ${IMAGE_QUALIFIED_NAME}
@@ -83,7 +80,7 @@ if [ "${IMPORT}" -eq 1 ]; then
 	done
 	sleep 5
 	echo "Running importer"
-	${VLO_DIR}/bin/vlo_solr_importer.sh -c ${VLO_DIR}/config/VloConfig-docker.xml
+	${VLO_TMP_DIR}/bin/vlo_solr_importer.sh -c ${VLO_TMP_DIR}/config/VloConfig-docker.xml
 	echo "Stopping Solr container"
 	docker stop vlo_solr_import
 	# TODO: Commit to image
