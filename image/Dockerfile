@@ -8,7 +8,10 @@ RUN bin/solr start \
 
 # Replace configuration, removing managed schema so that it gets created from the 
 # 'classic' schema.xml file provided by the VLO
-RUN rm -f /opt/solr/server/solr/collection1/conf/managed-schema
+RUN rm -f \
+	/opt/solr/server/solr/collection1/conf/managed-schema \
+	/opt/solr/server/solr/collection1/conf/solrconfig.xml \
+	/opt/solr/server/solr/collection1/conf/*.txt
 COPY tmp/solr-conf/ /opt/solr/server/solr/collection1/
 
 # Configure solr settings
