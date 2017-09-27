@@ -20,6 +20,12 @@ SOLR_CONF_TARGET_DIR="${IMAGE_TMP_DIR}/solr-conf"
 VLO_TMP_DIR="${TMPDIR}/vlo-$(date +'%s')"
 SOLR_CONF_TMP_DIR="${TMPDIR}/vlo-solr-$(date +'%s')"
 
+if [ -z "${DATAROOT_DIR}" ]
+then
+	
+	DATAROOT_DIR="$(cd ${BASEDIR}; pwd)/sample-data"
+fi
+
 IMPORT=0
 
 while [[ $# -gt 0 ]]
@@ -68,6 +74,11 @@ if [ "${IMPORT}" -eq 1 ]; then
 	# Configure to connect to instance
 	sed -e 's_<solrUrl>.*</solrUrl>_<solrUrl>http://localhost:8983/solr/collection1/</solrUrl>_g' ${VLO_TMP_DIR}/config/VloConfig.xml > ${VLO_TMP_DIR}/config/VloConfig-docker.xml
 	# TODO: set data roots
+	
+	# Prepare data roots
+	sed -e "s@__DATAROOT_DIR__@${DATAROOT_DIR}@g" ${BASEDIR}/vlo-config/dataroots-docker.xml > ${VLO_TMP_DIR}/config/dataroots-docker.xml
+	sed -i -e 's_<xi:include href="dataroots-production.xml"_<xi:include href="dataroots-docker.xml"_g' ${VLO_TMP_DIR}/config/VloConfig-docker.xml
+	
 	echo "Starting Solr container"
 	docker run --name vlo_solr_import -d -p 8983:8983 -t ${IMAGE_QUALIFIED_NAME}
 	# Wait for Solr to come online
@@ -79,7 +90,8 @@ if [ "${IMPORT}" -eq 1 ]; then
 	done
 	sleep 5
 	echo "Running importer"
-	${VLO_TMP_DIR}/bin/vlo_solr_importer.sh -c ${VLO_TMP_DIR}/config/VloConfig-docker.xml
+	(cd ${VLO_TMP_DIR}/bin && ./vlo_solr_importer.sh -c ${VLO_TMP_DIR}/config/VloConfig-docker.xml)
+	cp ${VLO_TMP_DIR}/log/*.log .
 	echo "Stopping Solr container"
 	docker stop vlo_solr_import
 	echo "Committing to ${IMAGE_QUALIFIED_NAME_WITH_DATA}" 

@@ -1,0 +1,9 @@
+<dataRoots>
+    <DataRoot>
+        <originName>VLO sample data</originName>
+        <rootFile>__DATAROOT_DIR__</rootFile>            
+        <prefix>http://vlo.clarin.eu/data/</prefix>
+        <tostrip>__DATAROOT_DIR__</tostrip>
+        <deleteFirst>false</deleteFirst>
+    </DataRoot>
+</dataRoots>

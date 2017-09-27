@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmd:CMD xmlns:cmd="http://www.clarin.eu/cmd/1"
+         xmlns:cmdp="http://www.clarin.eu/cmd/1/profiles/clarin.eu:cr1:p_1328259700928"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         CMDVersion="1.2"
+         xsi:schemaLocation="http://www.clarin.eu/cmd/1 https://infra.clarin.eu/CMDI/1.x/xsd/cmd-envelop.xsd http://www.clarin.eu/cmd/1/profiles/clarin.eu:cr1:p_1328259700928 http://alpha-vlo.clarin.eu/component-registry-rest/rest/registry/1.x/profiles/clarin.eu:cr1:p_1328259700928/xsd">
+   <cmd:Header>
+      <cmd:MdCreator>Jan Pieter Kunst</cmd:MdCreator>
+      <cmd:MdCreationDate>2011-12-15</cmd:MdCreationDate>
+      <cmd:MdSelfLink>http://hdl.handle.net/10744/mi_b9001180-e301-4069-91c2-96e169d3f2ab</cmd:MdSelfLink>
+      <cmd:MdProfile>clarin.eu:cr1:p_1328259700928</cmd:MdProfile>
+      <cmd:MdCollectionDisplayName>Meertens Collection: Soundbites</cmd:MdCollectionDisplayName>
+   </cmd:Header>
+   <cmd:Resources>
+      <cmd:ResourceProxyList>
+            <cmd:ResourceProxy id="soundbites_01__s_gravendeel">
+                <cmd:ResourceType mimetype="audio/mpeg">Resource</cmd:ResourceType>
+                <cmd:ResourceRef>http://hdl.handle.net/10744/9b10ad7b-dd00-43b9-af0f-7af08ff28088</cmd:ResourceRef>
+            </cmd:ResourceProxy>
+        </cmd:ResourceProxyList>
+      <cmd:JournalFileProxyList/>
+      <cmd:ResourceRelationList/>
+   </cmd:Resources>
+   <cmd:Components>
+        <cmdp:Soundbites-recording>
+            <cmdp:CreationYear>1968</cmdp:CreationYear>
+            <cmdp:GeoLocation>
+                <cmdp:City>s-Gravendeel</cmdp:City>
+                <cmdp:Municipality>Binnenmaas</cmdp:Municipality>
+                <cmdp:MunicipalityCode>0585</cmdp:MunicipalityCode>
+                <cmdp:Province>Zuid-Holland</cmdp:Province>
+                <cmdp:ProvinceCode>28</cmdp:ProvinceCode>
+                <cmdp:KloekeGeoReference>K093p</cmdp:KloekeGeoReference>
+                <cmdp:GeographicalCoordinates>51.7806875269,4.61197031058</cmdp:GeographicalCoordinates>
+                <cmdp:Country>
+                    <cmdp:Code>NL</cmdp:Code>
+                </cmdp:Country>
+                <cmdp:Continent>
+                    <cmdp:Code>EU</cmdp:Code>
+                </cmdp:Continent>
+                <cmdp:Comment>
+                    <cmdp:Comment/>
+                </cmdp:Comment>
+            </cmdp:GeoLocation>
+            <cmdp:SESSION>
+                <cmdp:Name>'s-Gravendeel</cmdp:Name>
+                <cmdp:SubjectLanguages>
+                    <cmdp:SubjectLanguage>
+                        <cmdp:Language>
+                            <cmdp:LanguageName>Dutch</cmdp:LanguageName>
+                            <cmdp:ISO639>
+                                <cmdp:iso-639-3-code>nld</cmdp:iso-639-3-code>
+                            </cmdp:ISO639>
+                        </cmdp:Language>
+                    </cmdp:SubjectLanguage>
+                </cmdp:SubjectLanguages>
+                <cmdp:Content>
+                    <cmdp:Genre>Discourse</cmdp:Genre>
+                    <cmdp:SubGenre>Conversation</cmdp:SubGenre>
+                    <cmdp:Task>Unspecified</cmdp:Task>
+                    <cmdp:Modality>
+                        <cmdp:Modality>Spoken</cmdp:Modality>
+                    </cmdp:Modality>
+                    <cmdp:CommunicationContext>
+                        <cmdp:PlanningType>planned</cmdp:PlanningType>
+                    </cmdp:CommunicationContext>
+                </cmdp:Content>
+            </cmdp:SESSION>
+            <cmdp:RightStmt>
+                <cmdp:Rights>http://www.meertens.knaw.nl/soundbites/disclaimer.php</cmdp:Rights>
+                <cmdp:Availability>Vrij beschikbaar voor dialectologisch, fonetisch, historisch of ander onderzoek. Onderzoekers wordt gevraagd bij publicatie als bron deze website te vermelden. Neem voor andersoortig gebruik contact op met het Meertens Instituut</cmdp:Availability>
+            </cmdp:RightStmt>
+            <cmdp:TechnicalMetadata cmd:ref="soundbites_01__s_gravendeel">
+                <cmdp:MimeType>audio/mpeg</cmdp:MimeType>
+                <cmdp:Size>
+                    <cmdp:TotalSize>
+                        <cmdp:Number>45</cmdp:Number>
+                        <cmdp:SizeUnit>minutes</cmdp:SizeUnit>
+                    </cmdp:TotalSize>
+                    <cmdp:TotalSize>
+                        <cmdp:Number>48</cmdp:Number>
+                        <cmdp:SizeUnit>megabyte</cmdp:SizeUnit>
+                    </cmdp:TotalSize>
+                </cmdp:Size>
+                <cmdp:SpeechTechnicalMetadata>
+                    <cmdp:Compression>lossy</cmdp:Compression>
+                    <cmdp:BitResolution>160</cmdp:BitResolution>
+                </cmdp:SpeechTechnicalMetadata>
+            </cmdp:TechnicalMetadata>
+        </cmdp:Soundbites-recording>
+    </cmd:Components>
+</cmd:CMD>
