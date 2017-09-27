@@ -2,15 +2,15 @@
 set -e
 
 PROJECT_NAME=vlo-solr
-VERSION=1.0
+REV=$(git rev-parse --short HEAD)
+TAG=1.0-SNAPSHOT-${REV:-latest}
 
 VLO_DISTRIBUTION_PACKAGE="https://github.com/clarin-eric/VLO/releases/download/vlo-4.2.1/vlo-4.2.1-Distribution.tar.gz"
 SOLR_CONF_PACKAGE="https://github.com/clarin-eric/VLO/archive/issue87.tar.gz"
 SOLR_CONF_DIR="vlo-web-app/src/test/resources/solr/collection1"
 
-REV=$(git rev-parse --short HEAD)
-TAG=1.0-SNAPSHOT-${REV:-latest}
 IMAGE_QUALIFIED_NAME="$PROJECT_NAME:${TAG}"
+IMAGE_QUALIFIED_NAME_WITH_DATA="${PROJECT_NAME}-data:${TAG}"
 
 BASEDIR=$(dirname "$0")
 IMAGE_DIR="${BASEDIR}/image"
@@ -82,15 +82,21 @@ if [ "${IMPORT}" -eq 1 ]; then
 	${VLO_TMP_DIR}/bin/vlo_solr_importer.sh -c ${VLO_TMP_DIR}/config/VloConfig-docker.xml
 	echo "Stopping Solr container"
 	docker stop vlo_solr_import
-	# TODO: Commit to image
+	echo "Committing to ${IMAGE_QUALIFIED_NAME_WITH_DATA}" 
+	docker commit vlo_solr_import ${IMAGE_QUALIFIED_NAME_WITH_DATA}
 	docker rm vlo_solr_import
 fi
 
 echo -e "\n\nDone! To start, run the following command: 
 
-	docker run --name vlo_solr -d -p 8983:8983 -t ${IMAGE_QUALIFIED_NAME}
+	docker run --name vlo_solr -d -p 8983:8983 -t ${IMAGE_QUALIFIED_NAME}"
+
+if [ "${IMPORT}" -eq 1 ]; then
+	echo -e "or: 
+	docker run --name vlo_solr -d -p 8983:8983 -t ${IMAGE_QUALIFIED_NAME_WITH_DATA}"
+fi
 	
-Then visit:
+echo -e "\nThen visit:
 
 	http://localhost:8983/solr/"
 
