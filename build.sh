@@ -73,13 +73,12 @@ if [ "${IMPORT}" -eq 1 ]; then
 	echo "Adapting VLO importer configuration"
 	# Configure to connect to instance
 	sed -e 's_<solrUrl>.*</solrUrl>_<solrUrl>http://localhost:8983/solr/collection1/</solrUrl>_g' ${VLO_TMP_DIR}/config/VloConfig.xml > ${VLO_TMP_DIR}/config/VloConfig-docker.xml
-	# TODO: set data roots
 	
 	# Prepare data roots
 	sed -e "s@__DATAROOT_DIR__@${DATAROOT_DIR}@g" ${BASEDIR}/vlo-config/dataroots-docker.xml > ${VLO_TMP_DIR}/config/dataroots-docker.xml
 	sed -i -e 's_<xi:include href="dataroots-production.xml"_<xi:include href="dataroots-docker.xml"_g' ${VLO_TMP_DIR}/config/VloConfig-docker.xml
 	
-	# Used built-in mapping files (remove file path prefix)
+	# Use built-in mapping files (remove file path prefix)
 	sed -i -e 's_file:/srv/VLO-mapping__g' ${VLO_TMP_DIR}/config/VloConfig-docker.xml
 	
 	echo "Starting Solr container"
