@@ -21,19 +21,15 @@ case $key in
         ;;
     *)
         echo "Unkown option: $key"
+        exit 2
         ;;
 esac
 shift # past argument or value
 done
 
 # Prepare temporary directories
-if [ -d "${IMAGE_TMP_DIR}" ]
-then
-	rm -rf "${IMAGE_TMP_DIR}"
-fi
-mkdir -p "${IMAGE_TMP_DIR}"
-mkdir -p "${VLO_TMP_DIR}"
-mkdir -p "${SOLR_CONF_TMP_DIR}"
+[ -d "${IMAGE_TMP_DIR}" ] && rm -rf "${IMAGE_TMP_DIR}"
+mkdir -p "${IMAGE_TMP_DIR}" "${VLO_TMP_DIR}" "${SOLR_CONF_TMP_DIR}"
 
 # Retrieve VLO distribution
 echo "Retrieving and unpacking VLO distribution..."
@@ -51,7 +47,7 @@ cp -R "${SOLR_CONF_TMP_DIR}/${SOLR_CONF_DIR}" "${SOLR_CONF_TARGET_DIR}"
 echo "Building ${IMAGE_QUALIFIED_NAME}"
 (cd $IMAGE_DIR && 
 	docker build --tag="$IMAGE_QUALIFIED_NAME" .)
-	
+
 # Run import and commit
 if [ "${IMPORT}" -eq 1 ]; then
 	export BASEDIR VLO_TMP_DIR DATAROOT_DIR IMAGE_QUALIFIED_NAME IMAGE_QUALIFIED_NAME_WITH_DATA
@@ -73,6 +69,4 @@ echo -e "\nThen visit:
 	http://localhost:8983/solr/"
 
 # Clean up
-rm -rf ${IMAGE_TMP_DIR}
-rm -rf ${VLO_TMP_DIR}
-rm -rf ${SOLR_CONF_TMP_DIR}
+rm -rf "${IMAGE_TMP_DIR}" "${VLO_TMP_DIR}" "${SOLR_CONF_TMP_DIR}"
