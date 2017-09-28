@@ -6,14 +6,10 @@ REV=$(git rev-parse --short HEAD)
 TAG=1.0-SNAPSHOT-${REV:-latest}
 BASEDIR=$(dirname "$0")
 
+# Load environment settings
 source ${BASEDIR}/script/env.sh
 
-if [ -z "${DATAROOT_DIR}" ]
-then
-	
-	DATAROOT_DIR="$(cd ${BASEDIR}; pwd)/sample-data"
-fi
-
+# Command line options
 IMPORT=0
 
 while [[ $# -gt 0 ]]
@@ -30,7 +26,7 @@ esac
 shift # past argument or value
 done
 
-
+# Prepare temporary directories
 if [ -d "${IMAGE_TMP_DIR}" ]
 then
 	rm -rf "${IMAGE_TMP_DIR}"
@@ -62,6 +58,7 @@ if [ "${IMPORT}" -eq 1 ]; then
 	${BASEDIR}/script/import-into-container.sh
 fi
 
+# Print some usage instructions
 echo -e "\n\nDone! To start, run the following command: 
 
 	docker run --name vlo_solr -d -p 8983:8983 -t ${IMAGE_QUALIFIED_NAME}"
@@ -75,6 +72,7 @@ echo -e "\nThen visit:
 
 	http://localhost:8983/solr/"
 
+# Clean up
 rm -rf ${IMAGE_TMP_DIR}
 rm -rf ${VLO_TMP_DIR}
 rm -rf ${SOLR_CONF_TMP_DIR}

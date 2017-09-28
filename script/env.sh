@@ -11,3 +11,9 @@ SOLR_CONF_TARGET_DIR="${IMAGE_TMP_DIR}/solr-conf"
 
 VLO_TMP_DIR="${TMPDIR}/vlo-$(date +'%s')"
 SOLR_CONF_TMP_DIR="${TMPDIR}/vlo-solr-$(date +'%s')"
+
+if [ -z "${DATAROOT_DIR}" ]
+then
+	
+	DATAROOT_DIR="$(cd ${BASEDIR}; pwd)/sample-data"
+fi
