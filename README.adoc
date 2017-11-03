@@ -1,47 +1,7 @@
-= Docker VLO Solr
+= DEPRECATED: Docker VLO Solr
 
-Image for VLO Solr instance (optionally) with sample data preloaded.
+Image for VLO Solr instance (optionally) with sample data preloaded. **DEPRECATED!**
 
-See https://github.com/clarin-eric/VLO
+Superseded by https://gitlab.com/CLARIN-ERIC/docker-solr[CLARIN's docker-solr image],
+also see https://gitlab.com/CLARIN-ERIC/compose_vlo[compose_vlo].
 
-== Dependencies
-
-[options="header",cols=",,,m"]
-|===
-| Conditions | Type | Name (URL) | Version constraint
-
-| by necessity
-| software
-| https://www.docker.com/[Docker Engine]
-| ==17.06.2
-
-| by necessity
-| image
-| https://hub.docker.com/_/solr/[`solr`]
-| ==3.4
-
-|===
-
-
-== To build and test
-
-=== Without a GitLab CI pipeline
-
-[source,sh]
-----
-sh build.sh [--import]
-----
-
-==== Options
-
-[glossary]
-`--import`::
-   Creates a second image extending the base VLO Solr image with a populated index.
-   Export the `DATAROOT_DIR` environment variable to specify the location of the CMDI data root to import.
-
-
-== Volumes
-
-[glossary]
-`/opt/solr/server/solr/collection1/data` (optional)::
-   Data directory for the Solr index, will be initialised on start if empty
